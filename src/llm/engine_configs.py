@@ -183,23 +183,23 @@ ENGINE_CONFIGS: Dict[str, Dict[str, Any]] = {
     "groq-coder": {
         "constructor": ChatOpenAI,
         "params": {
-            "model": os.getenv("GROQ_CODER_MODEL", "llama-3.3-70b-versatile"),
+            "model": os.getenv("GROQ_CODER_MODEL", "qwen/qwen3.8-27b"),
             "openai_api_key": os.getenv("GROQ_API_KEY") or os.getenv("LLAMA_API_KEY") or "EMPTY",
             "openai_api_base": "https://api.groq.com/openai/v1",
             "base_url": "https://api.groq.com/openai/v1",
             "temperature": 0.0,
-            "max_tokens": 1024,
+            "max_tokens": 2048,
         }
     },
     "groq-general": {
         "constructor": ChatOpenAI,
         "params": {
-            "model": os.getenv("GROQ_GENERAL_MODEL", "llama-3.3-70b-versatile"),
+            "model": os.getenv("GROQ_GENERAL_MODEL", "openai/gpt-oss-120b"),
             "openai_api_key": os.getenv("GROQ_API_KEY") or os.getenv("LLAMA_API_KEY") or "EMPTY",
             "openai_api_base": "https://api.groq.com/openai/v1",
             "base_url": "https://api.groq.com/openai/v1",
             "temperature": 0.0,
-            "max_tokens": 1024,
+            "max_tokens": 2048,
         }
     }
 }

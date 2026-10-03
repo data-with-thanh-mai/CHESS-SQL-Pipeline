@@ -1,9 +1,11 @@
 import os
+import sys
 import json
 from pathlib import Path
 from multiprocessing import Pool
 from typing import List, Dict, Any, Tuple
 from langgraph.graph import StateGraph
+from filelock import FileLock
 
 from runner.logger import Logger
 from runner.task import Task
@@ -12,7 +14,6 @@ from runner.statistics_manager import StatisticsManager
 from workflow.team_builder import build_team
 from database_utils.execution import ExecutionStatus
 from workflow.system_state import SystemState
-import fcntl
 
 class RunManager:
     RESULT_ROOT_PATH = "results"
@@ -60,16 +61,15 @@ class RunManager:
         else:
             temp_results = {str(question_id): 0}
         file_path = os.path.join(self.result_directory, "-predictions.json")
-        with open(file_path, 'r+') as f:
-            fcntl.flock(f, fcntl.LOCK_EX)
-            try:
+        lock_path = file_path + ".lock"
+        with FileLock(lock_path):
+            with open(file_path, 'r+') as f:
                 results = json.load(f)
                 results.update(temp_results)
                 f.seek(0)
                 json.dump(results, f, indent=4)
                 f.truncate()
-            finally:
-                fcntl.flock(f, fcntl.LOCK_UN)
+
 
     def initialize_tasks(self, dataset: List[Dict[str, Any]]):
         """
