@@ -175,6 +175,29 @@ ENGINE_CONFIGS: Dict[str, Dict[str, Any]] = {
             "model": os.getenv("LLAMA_MODEL", "llama-3.3-70b-versatile"),
             "openai_api_key": os.getenv("LLAMA_API_KEY") or os.getenv("GROQ_API_KEY") or os.getenv("OPENROUTER_API_KEY") or "EMPTY",
             "openai_api_base": os.getenv("LLAMA_API_BASE", "https://api.groq.com/openai/v1"),
+            "base_url": os.getenv("LLAMA_API_BASE", "https://api.groq.com/openai/v1"),
+            "temperature": 0.0,
+            "max_tokens": 1024,
+        }
+    },
+    "groq-coder": {
+        "constructor": ChatOpenAI,
+        "params": {
+            "model": os.getenv("GROQ_CODER_MODEL", "llama-3.3-70b-versatile"),
+            "openai_api_key": os.getenv("GROQ_API_KEY") or os.getenv("LLAMA_API_KEY") or "EMPTY",
+            "openai_api_base": "https://api.groq.com/openai/v1",
+            "base_url": "https://api.groq.com/openai/v1",
+            "temperature": 0.0,
+            "max_tokens": 1024,
+        }
+    },
+    "groq-general": {
+        "constructor": ChatOpenAI,
+        "params": {
+            "model": os.getenv("GROQ_GENERAL_MODEL", "llama-3.3-70b-versatile"),
+            "openai_api_key": os.getenv("GROQ_API_KEY") or os.getenv("LLAMA_API_KEY") or "EMPTY",
+            "openai_api_base": "https://api.groq.com/openai/v1",
+            "base_url": "https://api.groq.com/openai/v1",
             "temperature": 0.0,
             "max_tokens": 1024,
         }
