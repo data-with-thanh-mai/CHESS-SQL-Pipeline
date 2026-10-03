@@ -1,7 +1,12 @@
 venv/
+.venv/
 .env
+.env.local
+!.env.example
 results/
 data/
+*.sqlite
+*.pkl
 src/__pycache__/
 .DS_Store
 *.pyc
