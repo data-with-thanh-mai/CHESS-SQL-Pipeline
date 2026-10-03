@@ -27,7 +27,7 @@ def get_llm_chain(engine_name: str, temperature: float = 0, base_uri: str = None
     
     config = ENGINE_CONFIGS[engine_name]
     constructor = config["constructor"]
-    params = config["params"]
+    params = config["params"].copy()
     if temperature:
         params["temperature"] = temperature
     

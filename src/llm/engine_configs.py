@@ -158,5 +158,25 @@ ENGINE_CONFIGS: Dict[str, Dict[str, Any]] = {
                 "stop": [""]
             }
         }
+    },
+    "deepseek-coder-api": {
+        "constructor": ChatOpenAI,
+        "params": {
+            "model": os.getenv("DEEPSEEK_MODEL", "deepseek-coder"),
+            "openai_api_key": os.getenv("DEEPSEEK_API_KEY") or os.getenv("OPENROUTER_API_KEY") or "EMPTY",
+            "openai_api_base": os.getenv("DEEPSEEK_API_BASE", "https://api.deepseek.com/v1"),
+            "temperature": 0.0,
+            "max_tokens": 1024,
+        }
+    },
+    "llama-3-70b-api": {
+        "constructor": ChatOpenAI,
+        "params": {
+            "model": os.getenv("LLAMA_MODEL", "llama-3.3-70b-versatile"),
+            "openai_api_key": os.getenv("LLAMA_API_KEY") or os.getenv("GROQ_API_KEY") or os.getenv("OPENROUTER_API_KEY") or "EMPTY",
+            "openai_api_base": os.getenv("LLAMA_API_BASE", "https://api.groq.com/openai/v1"),
+            "temperature": 0.0,
+            "max_tokens": 1024,
+        }
     }
 }
